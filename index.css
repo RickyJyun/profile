@@ -81,13 +81,12 @@ section[id] .count_num {
     mix-blend-mode: color;
 }
 
-#top_section .film_frame iframe {
+#top_section .film_frame video {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     width: 100%;
-    height: 100%;
-    transform: scale(1.15);
+    transform: translate(-50%, -50%) scale(1.15);
 }
 
 #top_section .portrait {
