@@ -78,7 +78,8 @@ section[id] .count_num {
     width: 100%;
     height: 100%;
     background: linear-gradient(45deg, #EDA7FF 30%, #08A2EC);
-    mix-blend-mode: color;
+    mix-blend-mode: hard-light;
+    filter: brightness(80%);
 }
 
 #top_section .film_frame video {
@@ -87,6 +88,7 @@ section[id] .count_num {
     left: 50%;
     width: 100%;
     transform: translate(-50%, -50%) scale(1.15);
+    filter: grayscale(50%);
 }
 
 #top_section .portrait {
@@ -95,6 +97,10 @@ section[id] .count_num {
     left: 6%;
     z-index: 2;
     width: 20%;
+}
+
+#top_section .portrait:nth-child(2) {
+    display: none;
 }
 
 #top_section .texts {
@@ -144,10 +150,21 @@ section[id] .count_num {
         z-index: 3;
     }
 
+    #top_section .film_frame::before {
+        filter: brightness(100%);
+    }
+
     #top_section .portrait {
         left: 50%;
         transform: translateX(-50%);
         width: 60vmin;
+    }
+
+    #top_section .portrait:nth-child(2) {
+        display: unset;
+        z-index: 3;
+        clip-path: inset(31.9% 0% 29% 0%);
+        mix-blend-mode: soft-light;
     }
 
     #top_section .texts {
