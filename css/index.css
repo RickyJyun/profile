@@ -88,7 +88,7 @@ section[id] .count_num {
     left: 50%;
     width: 100%;
     transform: translate(-50%, -50%) scale(1.15);
-    filter: grayscale(50%);
+    filter: grayscale(80%);
 }
 
 #top_section .portrait {
