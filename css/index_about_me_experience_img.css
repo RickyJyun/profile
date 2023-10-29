@@ -21,17 +21,18 @@
 
 @media screen and (min-width:700px) and (max-width:1195px) {
     #about_me [data-content="experience"] .imgs_box .img_frame:first-of-type {
-        top: 0;
+        top: 5%;
         left: 4%;
     }
 
     #about_me [data-content="experience"] .imgs_box .img_frame:nth-of-type(2) {
-        top: 8%;
-        right: -6%;
+        top: -5%;
+        right: -5%;
     }
 
     #about_me [data-content="experience"] .imgs_box .img_frame:last-of-type {
+        width: 30vw;
         bottom: -10%;
-        left: 46%;
+        left: 54%;
     }
 }

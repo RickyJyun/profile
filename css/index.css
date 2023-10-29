@@ -237,6 +237,7 @@ section[id] .count_num {
     justify-content: center;
     align-items: center;
     background: repeating-linear-gradient(-45deg, black 0%, black .2%, rgba(0, 0, 0, 0) .2%, rgba(0, 0, 0, 0) .4%);
+    background-color: rgb(0 0 0 / 39%);
     overflow: hidden;
 }
 
