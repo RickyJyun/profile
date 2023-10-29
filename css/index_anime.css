@@ -1,0 +1,150 @@
+/* #about_me 區塊動畫 -start-*/
+#about_me .options_part dd[data-showed]::before,
+#about_me .options_part dd[data-showed]::after {
+    animation-name: anime_line;
+    animation-duration: 1s;
+    /* animation-timing-function: ease-in-out; */
+    animation-fill-mode: forwards;
+}
+
+#about_me .options_part dd[data-showed]::before {
+    animation-delay: 1s;
+}
+
+@keyframes anime_line {
+    0% {
+        clip-path: inset(0% 0% 0% 100%);
+    }
+
+    100% {
+        clip-path: inset(0% 0% 0% 0%);
+    }
+}
+
+#about_me figure.paragraph.hiding::before,
+#about_me figure.paragraph.hiding::after {
+    animation-name: frame_hiding_anime;
+    animation-duration: .4s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes frame_hiding_anime {
+    0% {
+        opacity: 1;
+        transform: translateY(-50%);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-55%);
+    }
+}
+
+#about_me figure.paragraph.flashing::before,
+#about_me figure.paragraph.flashing::after {
+    animation-name: frame_flashing_anime;
+    animation-duration: .2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes frame_flashing_anime {
+    0% {
+        opacity: 1;
+    }
+
+    25% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    75% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+#about_me figure.paragraph .desc_box.collapse {
+    animation-name: desc_box_collapse_anime;
+    animation-duration: .8s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes desc_box_collapse_anime {
+    0% {
+        clip-path: inset(0% 0% 0% 0%);
+    }
+
+    100% {
+        clip-path: inset(50% 0% 50% 0%);
+    }
+}
+
+#about_me figure.paragraph .desc_box.expand {
+    animation-name: desc_box_expand_anime;
+    animation-duration: .8s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes desc_box_expand_anime {
+    0% {
+        clip-path: inset(50% 0% 50% 0%);
+    }
+
+    100% {
+        clip-path: inset(0% 0% 0% 0%);
+    }
+}
+
+
+#about_me .desc_part .imgs_box.hide .img_frame {
+    animation-name: imgs_box_hide_anime;
+    animation-duration: .6s;
+    /* animation-timing-function: ease-in-out; */
+    animation-fill-mode: forwards;
+}
+
+@keyframes imgs_box_hide_anime {
+    0% {
+        filter: opacity(100%);
+        transform: scale(100%);
+    }
+
+    100% {
+        filter: opacity(0%);
+        transform: scale(125%);
+    }
+}
+
+
+#about_me .desc_part .imgs_box.show .img_frame {
+    animation-name: imgs_box_show_anime;
+    animation-duration: 2s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    z-index: -1;
+}
+
+@keyframes imgs_box_show_anime {
+    0% {
+        /* clip-path: inset(50% 0% 50% 0%); */
+        transform: translateY(15%);
+        filter: opacity(0%);
+    }
+
+    100% {
+        /* clip-path: inset(0% 0% 0% 0%); */
+        transform: translateY(0);
+        filter: opacity(100%);
+    }
+}
+
+/* #about_me 區塊動畫 -end-*/
