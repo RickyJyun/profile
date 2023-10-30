@@ -278,6 +278,7 @@ section[id] .count_num {
     color: #969799;
     transition: color .3s;
     cursor: pointer;
+    user-select: none;
 }
 
 #about_me .options_part dt:hover {
