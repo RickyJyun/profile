@@ -686,9 +686,9 @@ section[id] .count_num {
 }
 
 #about_creations .creations_part .preview_imgbox {
-    position: absolute;
+    position: fixed;
     top: 0;
-    left: -18vw;
+    left: 1.5vw;
     width: 16vmax;
     height: 18vmax;
     /* background-color: #EDA7FF; */
@@ -704,7 +704,7 @@ section[id] .count_num {
 }
 
 #about_creations .creations_part .preview_imgbox.zoom_in {
-    transform: scale(1);
+    transform: scale(1) translateY(-50%);
 }
 
 #about_creations .creations_part .preview_imgbox .img_frame img {

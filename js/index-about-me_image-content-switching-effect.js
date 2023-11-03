@@ -47,7 +47,7 @@
         let stopWindowScrollValue = document.documentElement.scrollTop
         let contentTag = this.innerText.toLowerCase().replace(/\s/, '_')
 
-        setImgParallaxToZero()
+        // setImgParallaxToZero()
         setTimeout(function () {
             descBox.classList.remove('expand')
             descBox.classList.add('collapse')
@@ -239,15 +239,15 @@
     }
 
     function setRandomNumForIMGs() {
-        let imgs = aboutMeSection.querySelectorAll('.img_frame')
+        let imgs = aboutMeSection.querySelectorAll('.img_frame>img')
         for (img of imgs) {
-            img.setAttribute("data-speed", 2)
+            img.setAttribute("data-speed", 3)
         }
     }
     setRandomNumForIMGs()
 
     function imgParallax(e) {
-        let imgs = aboutMeSection.querySelectorAll('.img_frame')
+        let imgs = aboutMeSection.querySelectorAll('.img_frame>img')
         for (img of imgs) {
             let speed = img.getAttribute('data-speed')
 

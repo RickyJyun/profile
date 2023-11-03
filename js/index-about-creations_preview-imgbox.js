@@ -8,11 +8,16 @@ creationsPart.addEventListener('mouseenter', function () {
 })
 
 creationsPart.addEventListener('mousemove', function (e) {
-    previewImgbox.style.top = `${e.pageY - document.querySelector('#about_creations').offsetTop - this.clientHeight * 0.58}px`
+    // previewImgbox.style.top = `${e.pageY - document.querySelector('#about_creations').offsetTop - this.clientHeight * 0.58}px`
+    previewImgbox.style.top = `${e.clientY}px`
 })
 
 creationsPart.addEventListener('mouseleave', function () {
     previewImgbox.classList.remove('zoom_in')
+})
+
+previewImgbox.addEventListener('mouseenter', function () {
+    this.classList.remove('zoom_in')
 })
 
 for (let i = 0; i < figures.length; i++) {
