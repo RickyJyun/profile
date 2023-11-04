@@ -115,15 +115,12 @@
     let stopWindowScrollValue
 
     function optionTitleTouchstartEvent(e) {
-        startPoint = e.pageX
-        currentPoint = Number(optionsPart.querySelector('div').style.transform.match(/translateX\((.+)px\)/)[1])
+        startPoint = optionsPart.scrollLeft
 
         for (let i = 0; i < optionTitles.length; i++) {
             optionTitles[i].removeAttribute("data-clicked")
             optionTitles[i].nextElementSibling.removeAttribute("data-showed")
         }
-
-        stopWindowScrollValue = document.documentElement.scrollTop
 
         descBox.classList.remove('expand')
         descBox.classList.add('collapse')
@@ -132,76 +129,42 @@
     }
 
 
-    function optionTitleTouchmoveEvent(e) {
-        this.querySelector('div').style.transform = `translateX(${-(startPoint - e.pageX - currentPoint) + 'px'})`
-
-        valueNumTag = startPoint - e.pageX
-
-        document.documentElement.scrollTop = stopWindowScrollValue
-    }
-
-
     function optionTitleTouchendEvent(e) {
-        if (valueNumTag <= 0) {
-            if (arrayNum <= 0) {
-                arrayNum = 0
-            } else {
-                arrayNum--
-            }
-        } else if (valueNumTag > 0) {
-            if (arrayNum >= optionTitles.length - 1) {
-                arrayNum = optionTitles.length - 1
-            } else {
-                arrayNum++
-            }
-        }
-
-        // console.log(optionTitles[1].parentNode.offsetLeft)
-        this.querySelector('div').style.transform = `translateX(${-optionTitles[arrayNum].parentNode.offsetLeft}px)`
-
-        optionTitles[arrayNum].setAttribute("data-clicked", "")
         setTimeout(function () {
-            optionTitles[arrayNum].nextElementSibling.setAttribute("data-showed", "")
-        }, 300)
+            for (let i = 0; i < optionTitles.length; i++) {
+                if (Math.abs(optionTitles[i].parentNode.offsetLeft - optionsPart.scrollLeft) < 100) {
+                    optionTitles[i].setAttribute("data-clicked", "")
+                    optionTitles[i].nextElementSibling.setAttribute("data-showed", "")
 
-        let contentTag = document.querySelector('#about_me [data-clicked]').innerText.toLowerCase().replace(/\s/, '_')
-        imgsCssStyle.href = `./css/index_about_me_${contentTag}_img.css`
-        imgsBox.innerHTML = paraContents[contentTag].imgs
-
-        descBox.parentNode.parentNode.setAttribute('data-content', `${contentTag}`)
-
-        descBox.innerHTML = `<p>${paraContents[contentTag].para}</p>`
-
-        descBox.classList.remove('collapse')
-        descBox.classList.add('expand')
-        paragraphFrame.classList.remove('hiding')
-        paragraphFrame.classList.add('flashing')
+                    let contentTag = document.querySelector('#about_me [data-clicked]').innerText.toLowerCase().replace(/\s/, '_')
+                    imgsCssStyle.href = `./css/index_about_me_${contentTag}_img.css`
+                    imgsBox.innerHTML = paraContents[contentTag].imgs
+                    descBox.parentNode.parentNode.setAttribute('data-content', `${contentTag}`)
+                    descBox.innerHTML = `<p>${paraContents[contentTag].para}</p>`
+                    descBox.classList.remove('collapse')
+                    descBox.classList.add('expand')
+                    paragraphFrame.classList.remove('hiding')
+                    paragraphFrame.classList.add('flashing')
+                }
+            }
+        }, 700)
     }
 
 
     function removeOptionFuncForMobile() {
         for (optionTitle of optionTitles) {
             optionsPart.removeEventListener('touchstart', optionTitleTouchstartEvent)
-            optionsPart.removeEventListener('touchmove', optionTitleTouchmoveEvent)
             optionsPart.removeEventListener('touchend', optionTitleTouchendEvent)
         }
     }
 
 
-
-
     if (window.innerWidth < 700) {
         removeOptionFuncForPC()
-        optionsPart.querySelector('div').style.transform = `translateX(0px)`
-        optionsPart.querySelector('div').style.transition = `.3s`
-
         optionsPart.addEventListener("touchstart", optionTitleTouchstartEvent)
-        optionsPart.addEventListener("touchmove", optionTitleTouchmoveEvent)
         optionsPart.addEventListener("touchend", optionTitleTouchendEvent)
     } else {
         removeOptionFuncForMobile()
-        optionsPart.querySelector('div').removeAttribute('style')
-
         for (optionTitle of optionTitles) {
             optionTitle.addEventListener('click', optionTitleClickEvent)
         }
@@ -210,18 +173,11 @@
     window.addEventListener('resize', function () {
         if (window.innerWidth < 700) {
             removeOptionFuncForPC()
-            // optionsPart.querySelector('div').style.transform = `translateX(0px)`
-            optionsPart.querySelector('div').style.transform = `translateX(${-document.querySelector('#about_me [data-clicked]').parentNode.offsetLeft}px)`
-
-            optionsPart.querySelector('div').style.transition = `.3s`
-
+            optionsPart.scrollLeft = document.querySelector('#about_me [data-clicked]').parentNode.offsetLeft
             optionsPart.addEventListener("touchstart", optionTitleTouchstartEvent)
-            optionsPart.addEventListener("touchmove", optionTitleTouchmoveEvent)
             optionsPart.addEventListener("touchend", optionTitleTouchendEvent)
         } else {
             removeOptionFuncForMobile()
-            optionsPart.querySelector('div').removeAttribute('style')
-
             for (optionTitle of optionTitles) {
                 optionTitle.addEventListener('click', optionTitleClickEvent)
             }

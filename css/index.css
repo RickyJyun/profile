@@ -414,33 +414,30 @@ section[id] .count_num {
 
     #about_me .options_part {
         width: 100%;
-        position: unset;
+        position: relative;
         top: unset;
         right: unset;
         transform: unset;
         margin: 16vmax 0 0%;
         -webkit-mask-image: linear-gradient(90deg, transparent, black, black, transparent);
-        padding-bottom: 2em;
-    }
-
-    #about_me .options_part>div {
-        position: relative;
-        top: 0;
-        left: 0;
-        width: fit-content;
+        padding: 0 0 0.2em 14%;
+        overflow-x: auto;
         white-space: nowrap;
         display: flex;
         flex-wrap: nowrap;
-        margin: 0 19.6%;
+        scroll-snap-type: x mandatory;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    #about_me .options_part::-webkit-scrollbar {
+        display: none;
     }
 
     #about_me .options_part dl {
         position: relative;
-    }
-
-    #about_me .options_part dl:not(#about_me .options_part dl:last-child) {
-        margin-bottom: unset;
-        margin-right: 4%;
+        margin: 0 4% 0;
+        scroll-snap-align: center;
     }
 
     #about_me .options_part dt {
@@ -450,7 +447,7 @@ section[id] .count_num {
     #about_me .options_part dd {
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-44%);
         padding-left: unset;
         text-align: center;
         font-size: 1em;
