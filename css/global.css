@@ -1,0 +1,60 @@
+@import url('https:/fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,600&family=Open+Sans&display=swap');
+
+html,
+html * {
+    padding: unset;
+    margin: unset;
+    box-sizing: border-box;
+}
+
+body {
+    background: #222326;
+}
+
+section[id] {
+    width: 100%;
+    font-size: 1vmax;
+    letter-spacing: 1px;
+    line-height: 1.8;
+    color: white;
+    font-family: Microsoft JhengHei;
+}
+
+section[id] p {
+    font-size: .8em;
+}
+
+section[id] h1 {
+    font-size: 4em;
+    font-weight: unset;
+    line-height: 1.2;
+    /* font-family: 'Open Sans', sans-serif; */
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+section[id] img {
+    width: 100%;
+}
+
+section[id] .count_num {
+    font-family: Microsoft JhengHei;
+    font-size: .8em;
+    color: #969799;
+}
+
+@media screen and (min-width:700px) and (max-width:1195px) {
+    section[id] {
+        font-size: 1.4vw;
+    }
+}
+
+@media screen and (max-width:700px) {
+    section[id] {
+        font-size: 1.9vmax;
+    }
+
+    section[id] h1 {
+        font-size: 2.6em;
+    }
+}

@@ -1,0 +1,113 @@
+#creations {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+/* creations_display_box -start- */
+.creations_display_box {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    position: absolute;
+    bottom: 22%;
+    gap: 1vmax;
+    transition: .2s;
+}
+
+div.creations_display_box .img_frame {
+    width: 21vw;
+    height: auto;
+}
+
+/* creations_display_box -end- */
+
+
+/* options_list -start- */
+.options_list {
+    font-family: 'Nunito Sans', sans-serif;
+    position: absolute;
+    bottom: 1vmax;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.options_list dl {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2em;
+    line-height: 1;
+    margin: 2vmax 0;
+    color: #969799;
+}
+
+.options_list dl dd {
+    cursor: pointer;
+    transition: .3s;
+}
+
+.options_list dl dd:not(.options_list dl dd:last-child) {
+    margin-bottom: 0.8em;
+}
+
+.options_list dl dd:hover {
+    color: white;
+}
+
+.options_list .list_btn {
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: unset;
+    padding: unset;
+    color: white;
+    border: unset;
+    font-size: 6em;
+    cursor: pointer;
+}
+
+/* options_list -end- */
+
+
+
+/* creations_info -start- */
+.creations_info {
+    position: absolute;
+    bottom: 3vmax;
+    left: 2vmax;
+}
+
+div.creations_info h1,
+div.creations_info h2 {
+    font-size: 1.1em;
+}
+
+div.creations_info h2 {
+    color: #969799;
+    margin-bottom: 1.2em;
+}
+
+.creations_info .progress_bar {
+    width: 14em;
+    height: 0.08em;
+    background-color: #969799;
+    position: relative;
+}
+
+.creations_info .progress_inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: unset;
+    height: 100%;
+    background-color: white;
+}
+
+/* creations_info -end- */
