@@ -15,7 +15,7 @@
     flex-wrap: nowrap;
     align-items: flex-end;
     position: absolute;
-    bottom: 22%;
+    bottom: 26%;
     gap: 1vmax;
     transition: .2s;
 }
@@ -32,7 +32,7 @@ div.creations_display_box .img_frame {
 .options_list {
     font-family: 'Nunito Sans', sans-serif;
     position: absolute;
-    bottom: 1vmax;
+    bottom: 2.4vmax;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -53,14 +53,27 @@ div.creations_display_box .img_frame {
 .options_list dl dd {
     cursor: pointer;
     transition: .3s;
-}
-
-.options_list dl dd:not(.options_list dl dd:last-child) {
-    margin-bottom: 0.8em;
+    position: relative;
+    opacity: 0;
 }
 
 .options_list dl dd:hover {
     color: white;
+}
+
+.options_list dl dd::after {
+    content: "";
+    position: absolute;
+    bottom: -.2em;
+    left: 0;
+    width: 100%;
+    height: .08em;
+    background-color: white;
+    transform: scaleX(0);
+}
+
+.options_list dl dd:not(.options_list dl dd:last-child) {
+    margin-bottom: 0.8em;
 }
 
 .options_list .list_btn {
@@ -71,6 +84,18 @@ div.creations_display_box .img_frame {
     border: unset;
     font-size: 6em;
     cursor: pointer;
+    position: relative;
+}
+
+.options_list .list_btn::after {
+    content: "";
+    position: absolute;
+    bottom: 0em;
+    left: 0;
+    width: 100%;
+    height: .04em;
+    background-color: white;
+    transform: scaleX(0);
 }
 
 /* options_list -end- */
@@ -99,6 +124,7 @@ div.creations_info h2 {
     height: 0.08em;
     background-color: #969799;
     position: relative;
+    overflow: hidden;
 }
 
 .creations_info .progress_inner {

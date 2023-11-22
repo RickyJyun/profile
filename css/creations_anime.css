@@ -1,0 +1,84 @@
+/* options_list 按鈕滑鼠移入移出 - 線的動畫效果 -start- */
+.options_list .list_btn.hover_anime::after,
+.options_list dl dd.hover_anime::after {
+    animation-name: hover_line_anime;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+    transform-origin: 0% 50%;
+    animation-timing-function: cubic-bezier(1, .02, 0, .99);
+}
+
+@keyframes hover_line_anime {
+    0% {
+        transform: scaleX(0%);
+    }
+
+    100% {
+        transform: scaleX(100%);
+    }
+}
+
+.options_list .list_btn.leave_anime::after,
+.options_list dl dd.leave_anime::after {
+    animation-name: leave_line_anime;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+    transform-origin: 100% 50%;
+    animation-timing-function: cubic-bezier(1, .02, 0, .99);
+}
+
+@keyframes leave_line_anime {
+    0% {
+        transform: scaleX(100%);
+    }
+
+    100% {
+        transform: scaleX(0%);
+    }
+}
+
+/* options_list 按鈕滑鼠移入移出 - 線的動畫效果 -end- */
+
+
+/* options_list 選單出現動畫效果 -start- */
+.options_list dd.show_anime {
+    animation-name: show_anime;
+    animation-duration: .3s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes show_anime {
+    0% {
+        transform: translateY(80%) perspective(400px) rotateX(-40deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0%) perspective(400px) rotateX(0deg);
+        opacity: 1;
+    }
+}
+
+/* options_list 選單出現動畫效果 -end- */
+
+
+/* options_list 選單隱藏動畫效果 -start- */
+.options_list dl.hide_anime {
+    animation-name: hide_anime;
+    animation-duration: .3s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes hide_anime {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* options_list 選單隱藏動畫效果 -end- */
