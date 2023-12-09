@@ -51,8 +51,8 @@ function fetchingData(creationsName) {
             creationsInfo_amount.innerText = `${creationsDisplayBox.querySelectorAll('.img_frame').length} items`
             allImageFrames = [...creationsDisplayBox.querySelectorAll('.img_frame')]
 
-            addViewBtnShowEvent()
             compareCreationsDetailDataHtmlIdList()
+            addViewBtnShowEvent()
         }
     )
 }
@@ -86,10 +86,8 @@ for (optionsListDd of optionsListDds) {
 
         let imgFrames = creationsDisplayBox.querySelectorAll('.img_frame')
         for (imgFrame of imgFrames) {
-            // imgFrame.classList.add('hide')
-            // imgFrame.classList.remove('show')
-            imgFrame.classList.toggle('hide')
-            imgFrame.classList.toggle('show')
+            imgFrame.classList.add('hide')
+            imgFrame.classList.remove('show')
         }
 
         // 3. 更改按鈕文字內容
@@ -102,7 +100,7 @@ for (optionsListDd of optionsListDds) {
             progressBarInner.style.width = `0%`
 
             fetchingData(listBtn.innerText.toLowerCase().replace(' ', '_'))
-
+            resetMobileImgframeDataProcess()
             startZoomImage()
             addViewBtnShowEvent()
         }, showingImgFrameAnimeTimes)
@@ -267,8 +265,7 @@ closeFrameBtn.addEventListener('click', function () {
         controlBar.style.opacity = 1
     }, 2100)
 
-    rwdEventAdderAndRemover()
-    // window.addEventListener('wheel', scrollCreationsItems)
+    window.addEventListener('wheel', scrollCreationsItems)
 })
 
 /*detail-frame control-bar 相關按鈕事件綁定 --end--*/
@@ -475,21 +472,19 @@ function addViewBtnShowEvent() {
 function rwdEventAdderAndRemover() {
     if (window.innerWidth < 1195) {
         window.removeEventListener('wheel', scrollCreationsItems)
-        startZoomImage()
         // 手機版版型數據整理【測試】
-        checkAllImageFrames()
+        resetMobileImgframeDataProcess()
+        startZoomImage()
     } else if (window.innerWidth > 1195) {
         window.addEventListener('wheel', scrollCreationsItems)
-        startZoomImage()
         // 手機版版型數據整理【測試】
-        checkAllImageFrames()
+        resetMobileImgframeDataProcess()
+        startZoomImage()
     }
 }
 rwdEventAdderAndRemover()
 
-window.addEventListener('load', function () {
-    rwdEventAdderAndRemover()
-})
+resetMobileImgframeDataProcess()
 
 window.addEventListener('resize', function () {
     rwdEventAdderAndRemover()
@@ -497,32 +492,31 @@ window.addEventListener('resize', function () {
 
 
 
-// 手機版版型數據整理
+// 數據整理for手機or電腦版版型
 let columns = []
 let timeId02
 
-function checkAllImageFrames() {
-    if (allImageFrames) {
-        mobileImgframeDataReset()
-        stopCheckAllImageFrames()
-    } else {
-        return
-    }
-}
-
-function startCheckAllImageFrames() {
-    timeId02 = setInterval(checkAllImageFrames, 1000)
-}
-
-function stopCheckAllImageFrames() {
-    clearInterval(timeId02);
-}
-
-function mobileImgframeDataReset() {
-    // window.innerWidth < 1195
+function resetMobileImgframeDataProcess() {
     if (getComputedStyle(document.querySelector('.creations_display_box')).display == 'grid') {
-        let columnNum = Number(getComputedStyle(document.querySelector('.creations_display_box')).gridTemplate.match(/repeat(\(.*),/)[1].replace('(', ''))
+        if (!allImageFrames) {
+            setTimeout(resetMobileImgframeDataProcess, 500)
+            return
+        }
 
+        // 獲取當前欄位數
+        let columnNum = Number(getComputedStyle(document.querySelector('.creations_display_box')).gridTemplateColumns.match(/px/g).length)
+
+        creationsDisplayBox.innerHTML = ''
+        for (let i = 0; i < columnNum; i++) {
+            creationsDisplayBox.innerHTML = creationsDisplayBox.innerHTML + `<div class="column"></div>`
+        }
+
+        if (!document.querySelector('.creations_display_box').children[0].className == 'column') {
+            setTimeout(resetMobileImgframeDataProcess, 500)
+            return
+        }
+
+        // 分開img_frame到不同數組
         for (let i = 0; i < columnNum; i++) {
             columns[i] = new Array
         }
@@ -538,11 +532,6 @@ function mobileImgframeDataReset() {
             }
         }
 
-        creationsDisplayBox.innerHTML = ''
-        for (let i = 0; i < columnNum; i++) {
-            creationsDisplayBox.innerHTML = creationsDisplayBox.innerHTML + `<div class="column"></div>`
-        }
-
         for (let i = 0; i < columnNum; i++) {
             for (let j = 0; j < columns[i].length; j++) {
                 creationsDisplayBox.querySelectorAll('.column')[i].innerHTML = creationsDisplayBox.querySelectorAll('.column')[i].innerHTML + columns[i][j].outerHTML
@@ -550,12 +539,21 @@ function mobileImgframeDataReset() {
         }
 
         compareCreationsDetailDataHtmlIdList()
-    } else if (getComputedStyle(document.querySelector('.creations_display_box')).display == 'flex') { //window.innerWidth > 1195
+        addViewBtnShowEvent()
+
+    } else if (getComputedStyle(document.querySelector('.creations_display_box')).display == 'flex') {
+        if (!allImageFrames) {
+            console.log('看屁看');
+            setTimeout(resetMobileImgframeDataProcess, 500)
+            return
+        }
+
         creationsDisplayBox.innerHTML = ''
         for (let i = 0; i < allImageFrames.length; i++) {
             creationsDisplayBox.innerHTML = creationsDisplayBox.innerHTML + allImageFrames[i].outerHTML
         }
 
         compareCreationsDetailDataHtmlIdList()
+        addViewBtnShowEvent()
     }
 }
