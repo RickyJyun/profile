@@ -6,6 +6,7 @@ html * {
     padding: unset;
     margin: unset;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
