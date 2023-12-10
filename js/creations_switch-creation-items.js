@@ -86,8 +86,9 @@ for (optionsListDd of optionsListDds) {
 
         let imgFrames = creationsDisplayBox.querySelectorAll('.img_frame')
         for (imgFrame of imgFrames) {
-            imgFrame.classList.add('hide')
+            imgFrame.classList.remove('hide')
             imgFrame.classList.remove('show')
+            imgFrame.classList.add('hide')
         }
 
         // 3. 更改按鈕文字內容
@@ -100,10 +101,15 @@ for (optionsListDd of optionsListDds) {
             progressBarInner.style.width = `0%`
 
             fetchingData(listBtn.innerText.toLowerCase().replace(' ', '_'))
-            resetMobileImgframeDataProcess()
-            startZoomImage()
+            // resetMobileImgframeDataProcess()
+            // startZoomImage()
             addViewBtnShowEvent()
         }, showingImgFrameAnimeTimes)
+
+        setTimeout(function () {
+            resetMobileImgframeDataProcess()
+            startZoomImage()
+        }, 1000)
     })
 }
 /* 切換選單 + 串接資料 -end-*/
@@ -162,6 +168,8 @@ function openDetailFrame() {
         // detailFrame.style.display = 'initial'
         detailFrameLayoutMode()
         detailFrame.classList.remove('hide')
+        detailFrame.querySelector('.main-content').style.width = `${initialZoomPercent}%`;
+        document.documentElement.style.overflow = 'hidden'
         window.removeEventListener('wheel', scrollCreationsItems)
     } else if (this.children[0].tagName == 'A') {
         return
@@ -171,11 +179,13 @@ function openDetailFrame() {
         // detailFrame.style.display = 'initial'
         detailFrameLayoutMode()
         detailFrame.classList.remove('hide')
+        detailFrame.querySelector('.main-content').style.width = `${initialZoomPercent}%`;
+        document.documentElement.style.overflow = 'hidden'
         window.removeEventListener('wheel', scrollCreationsItems)
         console.log(`沒有detail`);
     }
 
-    hideControlBar()
+    // hideControlBar()
 }
 
 // 選擇detail-frame的對齊模式【函數】
@@ -197,30 +207,50 @@ let zoomInBtn = detailFrame.querySelector('.zoom-in-btn')
 let fullScreenBtn = detailFrame.querySelector('.full-screen-btn')
 let closeFrameBtn = detailFrame.querySelector('.close-frame-btn')
 let zoomProgressNumber = detailFrame.querySelector('.zoom-progress-number')
-let zoomPercent = 50
+let zoomPercent
+let initialZoomPercent = Number(getComputedStyle(detailFrame.querySelector('.main-content')).width.replace('%', ''))
 let hideControlBarTimer
 
-controlBar.addEventListener('mouseenter', function () {
-    clearTimeout(hideControlBarTimer)
-    console.log('sss');
-    controlBar.style.opacity = 1
-})
+function resetDetailFrameWidth() {
+    if (window.innerWidth > 1195) {
+        initialZoomPercent = 50
+    } else {
+        initialZoomPercent = 90
+    }
 
-controlBar.addEventListener('mouseleave', function () {
-    hideControlBar()
-})
-
-function hideControlBar() {
-    hideControlBarTimer = setTimeout(function () {
-        controlBar.style.opacity = 0
-    }, 2000)
+    if (detailFrame.querySelector('.main-content').style.width) {
+        zoomPercent = Number(detailFrame.querySelector('.main-content').style.width.replace('%', ''))
+    } else {
+        zoomPercent = initialZoomPercent
+    }
+    zoomProgressNumber.innerText = `${zoomPercent}%`
 }
+resetDetailFrameWidth()
+
+// controlBar.addEventListener('mouseenter', function () {
+//     clearTimeout(hideControlBarTimer)
+//     console.log('sss');
+//     controlBar.style.opacity = 1
+// })
+
+// controlBar.addEventListener('mouseleave', function () {
+//     hideControlBar()
+// })
+
+// function hideControlBar() {
+//     if (document.querySelector('.creations_display_box').children[0].className == 'column') {
+//         return
+//     }
+//     hideControlBarTimer = setTimeout(function () {
+//         controlBar.style.opacity = 0
+//     }, 2000)
+// }
 
 
 orginalSizeBtn.addEventListener('click', function () {
-    zoomPercent = 50
-    this.parentNode.previousElementSibling.style.width = '50%'
-    zoomProgressNumber.innerText = '50%'
+    zoomPercent = initialZoomPercent
+    this.parentNode.previousElementSibling.style.width = `${zoomPercent}%`
+    zoomProgressNumber.innerText = `${zoomPercent}%`
 })
 
 zoomOutBtn.addEventListener('click', function () {
@@ -258,18 +288,60 @@ closeFrameBtn.addEventListener('click', function () {
     this.parentNode.previousElementSibling.style.width = '50%'
     this.parentNode.previousElementSibling.innerHTML = ''
 
-    zoomPercent = 50
-    zoomProgressNumber.innerText = '50%'
+    zoomPercent = initialZoomPercent
+    zoomProgressNumber.innerText = `${initialZoomPercent}%`
+    // this.parentNode.previousElementSibling.style.width = `${zoomPercent}%`
+    this.parentNode.previousElementSibling.style.removeProperty('width');
+
+    document.documentElement.style.removeProperty('overflow');
+
     setTimeout(function () {
         clearTimeout(hideControlBarTimer)
         controlBar.style.opacity = 1
     }, 2100)
 
-    window.addEventListener('wheel', scrollCreationsItems)
+    if (getComputedStyle(document.querySelector('.creations_display_box')).display == 'flex') {
+        window.addEventListener('wheel', scrollCreationsItems)
+    }
 })
-
 /*detail-frame control-bar 相關按鈕事件綁定 --end--*/
 
+
+/* control-bar 向下滾動隱藏|向上滾動顯示 for 手機版【函數】--start--*/
+let initalScrollTop01 = detailFrame.scrollTop
+function scrollAndHideControlBar() {
+    if (this.scrollTop - initalScrollTop01 > 0) {
+        controlBar.style.opacity = '0'
+        initalScrollTop01 = this.scrollTop
+    } else if (this.scrollTop >= this.scrollHeight - window.innerHeight) {
+        controlBar.style.opacity = '0'
+    } else if (this.scrollTop <= 0) {
+        controlBar.style.opacity = '1'
+    } else {
+        controlBar.style.opacity = '1'
+        initalScrollTop01 = this.scrollTop
+    }
+}
+detailFrame.addEventListener('scroll', scrollAndHideControlBar)
+
+
+let initalScrollTop02 = detailFrame.querySelector('.main-content').scrollTop
+function scrollAndHideControlBar2() {
+    if (this.scrollTop - initalScrollTop02 > 0) {
+        controlBar.style.opacity = '0'
+        initalScrollTop02 = this.scrollTop
+    } else if (this.scrollTop >= this.scrollHeight - window.innerHeight) {
+        controlBar.style.opacity = '0'
+    } else if (this.scrollTop <= 0) {
+        controlBar.style.opacity = '1'
+    } else {
+        controlBar.style.opacity = '1'
+        initalScrollTop02 = this.scrollTop
+    }
+}
+detailFrame.querySelector('.main-content').addEventListener('scroll', scrollAndHideControlBar2)
+
+/* control-bar 向下滾動隱藏|向上滾動顯示 for 手機版【函數】--end--*/
 
 
 /* 滾動creations items --start--*/
@@ -378,47 +450,52 @@ function stopZoomImage() {
 
 function zoomImage() {
     if (creationsDisplayBox.innerHTML) {
-        console.log('有抓到HTML架構')
         let imgFrames = creationsDisplayBox.querySelectorAll('.img_frame')
+        let imgNotLoadedCount = 0
 
         if (window.innerWidth < 1195) {
             for (let i = 0; i < imgFrames.length; i++) {
                 if (!imgFrames[i].querySelector('img').complete) {
-                    console.log(`第 ${i} 張圖片未讀取完成`)
-                    return
+                    imgNotLoadedCount++
+                    continue
                 } else {
-                    // 所有作品集圖片顯示(動畫)
-                    for (imgFrame of imgFrames) {
-                        imgFrame.classList.remove('zoom')
-                        imgFrame.classList.add('show')
-                    }
-                    stopZoomImage()
-                    return
+                    imgFrames[i].classList.remove('show')
+                    imgFrames[i].classList.add('show')
+                    imgFrames[i].classList.remove('hide')
                 }
             }
+
+            console.log('還在調用');
+            if (imgNotLoadedCount == 0) {
+                stopZoomImage()
+            } else if (creationsDisplayBox.querySelectorAll('.img_frame').length == creationsDisplayBox.querySelectorAll('.show').length) {
+                stopZoomImage()
+            }
+
         } else {
             for (let i = 0; i < imgFrames.length; i++) {
                 if (!imgFrames[i].querySelector('img').complete) {
-                    console.log(`第 ${i} 張圖片未讀取完成`)
-                    return
+                    imgNotLoadedCount++
+                    continue
                 } else {
-                    for (imgFrame of imgFrames) {
-                        if (imgFrame.querySelector('img').complete) {
-                            if (imgFrame.clientHeight / imgFrame.clientWidth < 1) {
-                                imgFrame.classList.add('zoom')
-                            }
-                        } else {
-                            return
-                        }
+                    if (imgFrames[i].clientHeight / imgFrames[i].clientWidth < 1) {
+                        imgFrames[i].classList.add('zoom')
+                        imgFrames[i].classList.remove('show')
+                        imgFrames[i].classList.add('show')
+                        imgFrames[i].classList.remove('hide')
+                    } else {
+                        imgFrames[i].classList.remove('show')
+                        imgFrames[i].classList.add('show')
+                        imgFrames[i].classList.remove('hide')
                     }
-                    stopZoomImage()
-                    // 所有作品集圖片顯示(動畫)
-                    for (imgFrame of imgFrames) {
-                        imgFrame.classList.add('show')
-                    }
-
-                    return
                 }
+            }
+
+            console.log('還在調用2');
+            if (imgNotLoadedCount == 0) {
+                stopZoomImage()
+            } else if (creationsDisplayBox.querySelectorAll('.img_frame').length == creationsDisplayBox.querySelectorAll('.show').length) {
+                stopZoomImage()
             }
         }
     } else {
@@ -426,6 +503,57 @@ function zoomImage() {
         return
     }
 }
+
+// function zoomImage() {
+//     if (creationsDisplayBox.innerHTML) {
+//         console.log('有抓到HTML架構')
+//         let imgFrames = creationsDisplayBox.querySelectorAll('.img_frame')
+
+//         if (window.innerWidth < 1195) {
+//             for (let i = 0; i < imgFrames.length; i++) {
+//                 if (!imgFrames[i].querySelector('img').complete) {
+//                     console.log(`第 ${i} 張圖片未讀取完成`)
+//                     return
+//                 } else {
+//                     // 所有作品集圖片顯示(動畫)
+//                     for (imgFrame of imgFrames) {
+//                         imgFrame.classList.remove('zoom')
+//                         imgFrame.classList.add('show')
+//                     }
+//                     stopZoomImage()
+//                     return
+//                 }
+//             }
+//         } else {
+//             for (let i = 0; i < imgFrames.length; i++) {
+//                 if (!imgFrames[i].querySelector('img').complete) {
+//                     console.log(`第 ${i} 張圖片未讀取完成`)
+//                     return
+//                 } else {
+//                     for (imgFrame of imgFrames) {
+//                         if (imgFrame.querySelector('img').complete) {
+//                             if (imgFrame.clientHeight / imgFrame.clientWidth < 1) {
+//                                 imgFrame.classList.add('zoom')
+//                             }
+//                         } else {
+//                             return
+//                         }
+//                     }
+//                     stopZoomImage()
+//                     // 所有作品集圖片顯示(動畫)
+//                     for (imgFrame of imgFrames) {
+//                         imgFrame.classList.add('show')
+//                     }
+
+//                     return
+//                 }
+//             }
+//         }
+//     } else {
+//         console.log('沒抓到')
+//         return
+//     }
+// }
 
 
 // 懸浮view按鈕 移動、顯現、隱藏
@@ -469,17 +597,36 @@ function addViewBtnShowEvent() {
 
 
 // 電腦 | 手機響應式功能切換
+let initialDeviceWidth = window.innerWidth
+let closeFrameBtnInnerText = closeFrameBtn.innerText
 function rwdEventAdderAndRemover() {
     if (window.innerWidth < 1195) {
         window.removeEventListener('wheel', scrollCreationsItems)
         // 手機版版型數據整理【測試】
         resetMobileImgframeDataProcess()
+        // 重置display-box transformX的位置&重置進度條
+        creationsDisplayBox.style.transform = `translateX(0px)`
+        progressBarInner.style.width = `0%`
         startZoomImage()
+
+        resetDetailFrameWidth()
+
+        if (window.innerWidth < 700) {
+            closeFrameBtn.innerText = ''
+        } else {
+            closeFrameBtn.innerText = closeFrameBtnInnerText
+        }
+
     } else if (window.innerWidth > 1195) {
         window.addEventListener('wheel', scrollCreationsItems)
         // 手機版版型數據整理【測試】
         resetMobileImgframeDataProcess()
+        // 重置display-box transformX的位置&重置進度條
+        creationsDisplayBox.style.transform = `translateX(0px)`
+        progressBarInner.style.width = `0%`
         startZoomImage()
+
+        resetDetailFrameWidth()
     }
 }
 rwdEventAdderAndRemover()
@@ -487,7 +634,12 @@ rwdEventAdderAndRemover()
 resetMobileImgframeDataProcess()
 
 window.addEventListener('resize', function () {
-    rwdEventAdderAndRemover()
+    if (window.innerWidth == initialDeviceWidth) {
+        return
+    } else {
+        initialDeviceWidth = window.innerWidth
+        rwdEventAdderAndRemover()
+    }
 })
 
 
