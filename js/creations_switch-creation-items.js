@@ -147,7 +147,11 @@ function compareCreationsDetailDataHtmlIdList() {
 
 
 // 點擊圖片後開啟detail-frame【函數】
+let initialHTMLScrollTop
+
 function openDetailFrame() {
+    initialHTMLScrollTop = document.documentElement.scrollTop
+
     if (this.dataset.detailId) {
         // console.log(`./creations_all/${listBtn.innerText.replace(' ', '_').toLowerCase()}/${this.dataset.detailId}`);
         fetch(`./creations_all/${listBtn.innerText.replace(' ', '_').toLowerCase()}/${this.dataset.detailId}`).then(
@@ -169,7 +173,7 @@ function openDetailFrame() {
         detailFrameLayoutMode()
         detailFrame.classList.remove('hide')
         detailFrame.querySelector('.main-content').style.width = `${initialZoomPercent}%`;
-        document.documentElement.style.overflow = 'hidden'
+
         window.removeEventListener('wheel', scrollCreationsItems)
     } else if (this.children[0].tagName == 'A') {
         return
@@ -180,12 +184,16 @@ function openDetailFrame() {
         detailFrameLayoutMode()
         detailFrame.classList.remove('hide')
         detailFrame.querySelector('.main-content').style.width = `${initialZoomPercent}%`;
-        document.documentElement.style.overflow = 'hidden'
+
         window.removeEventListener('wheel', scrollCreationsItems)
         console.log(`沒有detail`);
     }
 
-    // hideControlBar()
+    setTimeout(function () {
+        if (controlBar.style.opacity == '0') {
+            controlBar.style.removeProperty('opacity')
+        }
+    }, 100)
 }
 
 // 選擇detail-frame的對齊模式【函數】
@@ -226,26 +234,6 @@ function resetDetailFrameWidth() {
     zoomProgressNumber.innerText = `${zoomPercent}%`
 }
 resetDetailFrameWidth()
-
-// controlBar.addEventListener('mouseenter', function () {
-//     clearTimeout(hideControlBarTimer)
-//     console.log('sss');
-//     controlBar.style.opacity = 1
-// })
-
-// controlBar.addEventListener('mouseleave', function () {
-//     hideControlBar()
-// })
-
-// function hideControlBar() {
-//     if (document.querySelector('.creations_display_box').children[0].className == 'column') {
-//         return
-//     }
-//     hideControlBarTimer = setTimeout(function () {
-//         controlBar.style.opacity = 0
-//     }, 2000)
-// }
-
 
 orginalSizeBtn.addEventListener('click', function () {
     zoomPercent = initialZoomPercent
@@ -293,7 +281,9 @@ closeFrameBtn.addEventListener('click', function () {
     // this.parentNode.previousElementSibling.style.width = `${zoomPercent}%`
     this.parentNode.previousElementSibling.style.removeProperty('width');
 
-    document.documentElement.style.removeProperty('overflow');
+    document.documentElement.style.scrollBehavior = 'unset'
+    document.documentElement.scrollTop = initialHTMLScrollTop
+    document.documentElement.style.removeProperty('scroll-behavior')
 
     setTimeout(function () {
         clearTimeout(hideControlBarTimer)
@@ -310,19 +300,19 @@ closeFrameBtn.addEventListener('click', function () {
 /* control-bar 向下滾動隱藏|向上滾動顯示 for 手機版【函數】--start--*/
 let initalScrollTop01 = detailFrame.scrollTop
 function scrollAndHideControlBar() {
-    if (this.scrollTop - initalScrollTop01 > 0) {
+    if (this.scrollTop - initalScrollTop01 > 0 && this.scrollTop - initalScrollTop01 > 100) {
         controlBar.style.opacity = '0'
         initalScrollTop01 = this.scrollTop
-    } else if (this.scrollTop >= this.scrollHeight - window.innerHeight) {
-        controlBar.style.opacity = '0'
-    } else if (this.scrollTop <= 0) {
-        controlBar.style.opacity = '1'
-    } else {
+    } else if (this.scrollTop - initalScrollTop01 < 0) {
         controlBar.style.opacity = '1'
         initalScrollTop01 = this.scrollTop
     }
+
+    console.log(`detailFrame：${detailFrame.scrollTop}`)
+    console.log(`main-content：${detailFrame.querySelector('.main-content').scrollTop}`)
 }
 detailFrame.addEventListener('scroll', scrollAndHideControlBar)
+// detailFrame.querySelector('.main-content').addEventListener('scroll', scrollAndHideControlBar)
 
 
 let initalScrollTop02 = detailFrame.querySelector('.main-content').scrollTop
@@ -451,51 +441,82 @@ function stopZoomImage() {
 function zoomImage() {
     if (creationsDisplayBox.innerHTML) {
         let imgFrames = creationsDisplayBox.querySelectorAll('.img_frame')
-        let imgNotLoadedCount = 0
+        let imgNotLoadedCount = imgFrames.length
 
         if (window.innerWidth < 1195) {
             for (let i = 0; i < imgFrames.length; i++) {
                 if (!imgFrames[i].querySelector('img').complete) {
-                    imgNotLoadedCount++
                     continue
                 } else {
-                    imgFrames[i].classList.remove('show')
-                    imgFrames[i].classList.add('show')
-                    imgFrames[i].classList.remove('hide')
+                    if (imgFrames[i].dataset.loadedStatus) {
+                        imgNotLoadedCount--
+                        if (imgNotLoadedCount <= 0) {
+                            stopZoomImage()
+                            console.log('圖片已全數載入完成!!!');
+                            return
+                        }
+                    } else if (!imgFrames[i].dataset.loadedStatus) {
+                        imgFrames[i].setAttribute('data-loaded-status', 'done')
+                        imgFrames[i].classList.remove('zoom')
+                        imgFrames[i].classList.remove('show')
+                        imgFrames[i].classList.remove('hide')
+                        imgFrames[i].classList.add('show')
+
+                        imgNotLoadedCount--
+                        if (imgNotLoadedCount <= 0) {
+                            stopZoomImage()
+                            console.log('圖片已全數載入完成!!!');
+                            return
+                        }
+                    }
                 }
             }
 
-            console.log('還在調用');
-            if (imgNotLoadedCount == 0) {
+            if (imgNotLoadedCount <= 0) {
                 stopZoomImage()
-            } else if (creationsDisplayBox.querySelectorAll('.img_frame').length == creationsDisplayBox.querySelectorAll('.show').length) {
-                stopZoomImage()
+                console.log('圖片已全數載入完成!!!');
+                return
+            } else {
+                console.log('還有圖片未載入完成');
             }
 
         } else {
             for (let i = 0; i < imgFrames.length; i++) {
                 if (!imgFrames[i].querySelector('img').complete) {
-                    imgNotLoadedCount++
                     continue
                 } else {
-                    if (imgFrames[i].clientHeight / imgFrames[i].clientWidth < 1) {
-                        imgFrames[i].classList.add('zoom')
-                        imgFrames[i].classList.remove('show')
-                        imgFrames[i].classList.add('show')
-                        imgFrames[i].classList.remove('hide')
-                    } else {
-                        imgFrames[i].classList.remove('show')
-                        imgFrames[i].classList.add('show')
-                        imgFrames[i].classList.remove('hide')
+                    if (imgFrames[i].dataset.loadedStatus) {
+                        imgNotLoadedCount--
+                    } else if (!imgFrames[i].dataset.loadedStatus) {
+                        imgFrames[i].setAttribute('data-loaded-status', 'done')
+
+                        if (imgFrames[i].clientHeight / imgFrames[i].clientWidth < 1) {
+                            imgFrames[i].classList.add('zoom')
+                            imgFrames[i].classList.remove('show')
+                            imgFrames[i].classList.remove('hide')
+                            imgFrames[i].classList.add('show')
+                        } else {
+                            imgFrames[i].classList.remove('show')
+                            imgFrames[i].classList.remove('hide')
+                            imgFrames[i].classList.add('show')
+                        }
+
+                        imgNotLoadedCount--
+                        if (imgNotLoadedCount <= 0) {
+                            stopZoomImage()
+                            console.log('圖片已全數載入完成2!!!');
+                            return
+                        }
                     }
                 }
             }
 
-            console.log('還在調用2');
-            if (imgNotLoadedCount == 0) {
+            if (imgNotLoadedCount <= 0) {
                 stopZoomImage()
-            } else if (creationsDisplayBox.querySelectorAll('.img_frame').length == creationsDisplayBox.querySelectorAll('.show').length) {
-                stopZoomImage()
+                console.log('圖片已全數載入完成2!!!');
+                return
+            } else {
+                console.log('還有圖片未載入完成2');
             }
         }
     } else {
@@ -503,57 +524,6 @@ function zoomImage() {
         return
     }
 }
-
-// function zoomImage() {
-//     if (creationsDisplayBox.innerHTML) {
-//         console.log('有抓到HTML架構')
-//         let imgFrames = creationsDisplayBox.querySelectorAll('.img_frame')
-
-//         if (window.innerWidth < 1195) {
-//             for (let i = 0; i < imgFrames.length; i++) {
-//                 if (!imgFrames[i].querySelector('img').complete) {
-//                     console.log(`第 ${i} 張圖片未讀取完成`)
-//                     return
-//                 } else {
-//                     // 所有作品集圖片顯示(動畫)
-//                     for (imgFrame of imgFrames) {
-//                         imgFrame.classList.remove('zoom')
-//                         imgFrame.classList.add('show')
-//                     }
-//                     stopZoomImage()
-//                     return
-//                 }
-//             }
-//         } else {
-//             for (let i = 0; i < imgFrames.length; i++) {
-//                 if (!imgFrames[i].querySelector('img').complete) {
-//                     console.log(`第 ${i} 張圖片未讀取完成`)
-//                     return
-//                 } else {
-//                     for (imgFrame of imgFrames) {
-//                         if (imgFrame.querySelector('img').complete) {
-//                             if (imgFrame.clientHeight / imgFrame.clientWidth < 1) {
-//                                 imgFrame.classList.add('zoom')
-//                             }
-//                         } else {
-//                             return
-//                         }
-//                     }
-//                     stopZoomImage()
-//                     // 所有作品集圖片顯示(動畫)
-//                     for (imgFrame of imgFrames) {
-//                         imgFrame.classList.add('show')
-//                     }
-
-//                     return
-//                 }
-//             }
-//         }
-//     } else {
-//         console.log('沒抓到')
-//         return
-//     }
-// }
 
 
 // 懸浮view按鈕 移動、顯現、隱藏
@@ -597,7 +567,7 @@ function addViewBtnShowEvent() {
 
 
 // 電腦 | 手機響應式功能切換
-let initialDeviceWidth = window.innerWidth
+let initialDeviceWidth = window.outerWidth
 let closeFrameBtnInnerText = closeFrameBtn.innerText
 function rwdEventAdderAndRemover() {
     if (window.innerWidth < 1195) {
@@ -634,12 +604,14 @@ rwdEventAdderAndRemover()
 resetMobileImgframeDataProcess()
 
 window.addEventListener('resize', function () {
-    if (window.innerWidth == initialDeviceWidth) {
-        return
-    } else {
-        initialDeviceWidth = window.innerWidth
-        rwdEventAdderAndRemover()
-    }
+    setTimeout(function () {
+        if (window.outerWidth == initialDeviceWidth) {
+            return
+        } else {
+            initialDeviceWidth = window.outerWidth
+            rwdEventAdderAndRemover()
+        }
+    }, 100)
 })
 
 

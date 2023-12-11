@@ -528,13 +528,7 @@ section#detail-frame .close-frame-btn:hover {
 
 @media screen and (max-width:700px) {
     section#detail-frame .control-bar {
-        bottom: 4em;
-        left: unset;
-        right: 2em;
-        transform: unset;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        bottom: 10vmax;
         padding: 0;
         -webkit-backdrop-filter: unset;
         backdrop-filter: unset;
@@ -542,7 +536,6 @@ section#detail-frame .close-frame-btn:hover {
     }
 
     section#detail-frame .control-bar>* {
-        margin: .6em 0;
         -webkit-backdrop-filter: blur(3px);
         backdrop-filter: blur(3px);
         background-color: #22232687;
