@@ -1,0 +1,135 @@
+/* 開啟選單按鈕動畫 --start-- */
+.menuBtn * {
+    animation-duration: 1s;
+}
+
+.menuBtn[data-status="opened"] span:first-child {
+    animation-name: menuBtn_cross_hambuger-top;
+    animation-timing-function: cubic-bezier(1, .02, 0, .99);
+    animation-fill-mode: forwards;
+}
+
+@keyframes menuBtn_cross_hambuger-top {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(0.6rem);
+    }
+
+    100% {
+        width: 46%;
+        transform: translateY(0.6rem) rotate(45deg);
+    }
+}
+
+.menuBtn[data-status="opened"] span:nth-child(2) {
+    animation-name: menuBtn_cross_hambuger-middle;
+
+    animation-timing-function: cubic-bezier(1, .02, 0, .99);
+    animation-fill-mode: forwards;
+}
+
+@keyframes menuBtn_cross_hambuger-middle {
+    0% {
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.menuBtn[data-status="opened"] span:last-child {
+    animation-name: menuBtn_cross_hambuger-bottom;
+    animation-timing-function: cubic-bezier(1, .02, 0, .99);
+    animation-fill-mode: forwards;
+}
+
+@keyframes menuBtn_cross_hambuger-bottom {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-0.6rem);
+    }
+
+    100% {
+        width: 46%;
+        transform: translateY(-0.6rem) rotate(-45deg);
+    }
+}
+
+/* 開啟選單按鈕動畫 --end-- */
+
+
+/* 關閉選單按鈕動畫 --start-- */
+.menuBtn[data-status="closed"] span:first-child {
+    animation-name: menuBtn_hambuger-top;
+    animation-timing-function: cubic-bezier(1, .02, 0, .99);
+    animation-fill-mode: forwards;
+}
+
+@keyframes menuBtn_hambuger-top {
+    0% {
+        width: 46%;
+        transform: translateY(0.6rem) rotate(45deg);
+    }
+
+    50% {
+        transform: translateY(0.6rem);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.menuBtn[data-status="closed"] span:nth-child(2) {
+    animation-name: menuBtn_hambuger-middle;
+    animation-timing-function: cubic-bezier(1, .02, 0, .99);
+    animation-fill-mode: forwards;
+}
+
+@keyframes menuBtn_hambuger-middle {
+    0% {
+        opacity: 0;
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.menuBtn[data-status="closed"] span:last-child {
+    animation-name: menuBtn_hambuger-bottom;
+    animation-timing-function: cubic-bezier(1, .02, 0, .99);
+    animation-fill-mode: forwards;
+}
+
+@keyframes menuBtn_hambuger-bottom {
+    0% {
+        width: 46%;
+        transform: translateY(-0.6rem) rotate(-45deg);
+    }
+
+    50% {
+        transform: translateY(-0.6rem);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* 關閉選單按鈕動畫 --end-- */

@@ -47,6 +47,8 @@
         let stopWindowScrollValue = document.documentElement.scrollTop
         let contentTag = this.innerText.toLowerCase().replace(/\s/, '_')
 
+        document.documentElement.style.scrollBehavior = 'unset'
+
         // setImgParallaxToZero()
         setTimeout(function () {
             descBox.classList.remove('expand')
@@ -81,6 +83,8 @@
             imgsBox.classList.add('show')
             paragraphFrame.classList.remove('hiding')
             paragraphFrame.classList.add('flashing')
+
+            document.documentElement.style.removeProperty('scroll-behavior')
 
             // For img Parallax Effect
             setTimeout(function () {

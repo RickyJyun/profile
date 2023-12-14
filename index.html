@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/index_anime.css">
     <link rel="stylesheet" data-about-me-imgs-style href="./css/index_about_me_education_img.css">
+    <link rel="stylesheet" href="./css/menu_nav.css">
+    <link rel="stylesheet" href="./css/menu_nav_anime.css">
     <style>
         @import url('https:/fonts.googleapis.com/css2?family=Open+Sans&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,600&family=Open+Sans&display=swap');
@@ -16,6 +18,43 @@
 </head>
 
 <body>
+    <header>
+        <div class="menuBtn">
+            <div><span></span><span></span><span></span></div>
+        </div>
+        <nav style="display: none;">
+            <div>
+                <dl>
+                    <dt data-link="./index">HOME</dt>
+                    <dd>首頁</dd>
+                </dl>
+                <dl>
+                    <dt data-link="./creations">CREATIONS</dt>
+                    <dd>作品集</dd>
+                    <dd>
+                        <dl>
+                            <dd data-link="./creations">網頁設計</dd>
+                            <dd data-link="./creations">平面設計</dd>
+                            <dd data-link="./creations">印刷設計</dd>
+                            <dd data-link="./creations">Landing Page</dd>
+                        </dl>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>CONTACT</dt>
+                    <dd>與我聯繫</dd>
+                    <dd>
+                        <dl>
+                            <dd>lussdesignstudio@gmail.com</dd>
+                            <dd><a href="https://m.me/104462231406126">Messenger</a></dd>
+                        </dl>
+                    </dd>
+                </dl>
+            </div>
+        </nav>
+    </header>
+
+
     <section id="top_section">
         <div class="main_content">
             <div class="film_frame">
@@ -237,6 +276,7 @@
     </section>
 
 
+    <script src="./js/menu_nav.js" type="text/JavaScript"></script>
     <script src="./js/index-about-me_image-content-switching-effect.js" type="text/JavaScript"></script>
     <script src="./js/index-about-creations_preview-imgbox.js" type="text/JavaScript"></script>
 </body>

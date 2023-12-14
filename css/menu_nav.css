@@ -1,0 +1,220 @@
+/* nav 菜單欄按鈕 --start-- */
+.menuBtn {
+    position: fixed;
+    top: 1.6rem;
+    left: 2rem;
+    z-index: 99;
+    width: 4rem;
+    height: 4rem;
+    background: black;
+    border-radius: 100vw;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 100%;
+    color: rgb(72, 72, 72);
+    transition: .3s;
+}
+
+
+
+.menuBtn::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -2;
+    width: 90%;
+    height: 90%;
+    border-radius: 100vw;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background: linear-gradient(90deg, #F276FF, #B781FA, #7D8CF6, #4297F1, #08A2EC, #08A2EC, #4297F1, #7D8CF6, #B781FA, #F276FF);
+    background-size: 400%;
+    animation-name: menuBtn;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    border: .3em black solid;
+}
+
+.menuBtn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    width: 90%;
+    height: 90%;
+    border-radius: 100vw;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background: linear-gradient(90deg, #F276FF, #B781FA, #7D8CF6, #4297F1, #08A2EC, #08A2EC, #4297F1, #7D8CF6, #B781FA, #F276FF);
+    background-size: 400%;
+    animation-name: menuBtn_gradient-anime;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    filter: blur(.3rem);
+    mix-blend-mode: hard-light;
+}
+
+@keyframes menuBtn_gradient-anime {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 400% 0;
+    }
+}
+
+.menuBtn>div {
+    background: linear-gradient(204deg, #6a6a6a, black 40%);
+    width: 84%;
+    height: 84%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100vw;
+    user-select: none;
+}
+
+.menuBtn span {
+    width: 40%;
+    height: .1rem;
+    background-color: rgb(72, 72, 72);
+    transition: .3s;
+}
+
+.menuBtn span:nth-child(2) {
+    margin: .5rem 0;
+}
+
+.menuBtn:hover span {
+    background-color: rgb(221, 221, 221);
+}
+
+.menuBtn:active span {
+    background-color: rgb(196, 196, 196);
+}
+
+.menuBtn:active>div {
+    /* background: linear-gradient(40deg, #6a6a6a 4%, black 40%); */
+    background: radial-gradient(#6a6a6a 26%, black 60%);
+    background-position: -110% -24%;
+    background-size: 200% 250%;
+}
+
+@media screen and (max-width:700px) {
+    .menuBtn {
+        top: 3%;
+        left: 5%;
+    }
+}
+
+/* nav 菜單欄按鈕 --end-- */
+
+
+
+
+/* nav 菜單欄 --start-- */
+nav {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 98;
+    transform: translate(-50%, -50%);
+}
+
+nav>div {
+    width: 84dvw;
+    height: 93dvh;
+    background-color: #f1f3f5;
+    border-radius: 1.6rem;
+    padding: 3rem;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    color: #222326;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transform: scale(0);
+    transition: .6s;
+    transition-timing-function: cubic-bezier(1, .02, 0, .99);
+}
+
+nav>div::before {
+    content: "";
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    padding: 3rem 0;
+    background-color: #f1f3f5;
+    border-bottom: solid 1px #c3c6c8;
+    transform: translateY(-1rem);
+    display: none;
+}
+
+nav.opened>div {
+    transform: scale(1);
+}
+
+nav>div>dl>dt {
+    font-size: 2rem;
+}
+
+nav>div>dl>dd:first-of-type {
+    font-size: 1rem;
+}
+
+nav>div>dl dl {
+    margin-top: 1rem;
+}
+
+nav>div>dl dl>dd {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: .88rem;
+    margin: .4rem 0;
+    color: #57585a;
+}
+
+nav a {
+    color: unset;
+    text-decoration: none;
+}
+
+nav [data-link],
+nav a {
+    opacity: 1;
+    cursor: pointer;
+    transition: .3s;
+}
+
+nav [data-link]:hover,
+nav a:hover {
+    opacity: .8;
+}
+
+@media screen and (max-width:700px) {
+    nav>div {
+        width: 96dvw;
+        height: 98dvh;
+        padding: 1rem;
+        gap: 1rem;
+        overflow: auto;
+    }
+
+    nav>div::before {
+        display: initial;
+    }
+
+    nav>div>dl:first-child {
+        margin-top: -1rem;
+    }
+}
+
+/* nav 菜單欄 --end-- */
