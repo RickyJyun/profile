@@ -224,12 +224,13 @@ div.creations_info h2 {
         bottom: unset;
         gap: .5rem;
         margin: auto;
-        padding: 10vmax 0;
+        padding: 6rem 0 10vmax 0;
     }
 
     .creations_display_box>.column {
         display: flex;
         flex-direction: column;
+        gap: 0.2rem;
     }
 
     div.creations_display_box .img_frame {
@@ -273,11 +274,15 @@ div.creations_info h2 {
         font-size: 4vw;
     }
 
+    .options_list dl dd:not(.options_list dl dd:last-child) {
+        margin-bottom: 2.4rem;
+    }
+
     .options_list .list_btn::before {
-        top: 3vw;
-        right: -5vw;
-        width: 3vw;
-        height: 3vw;
+        top: 3.4vw;
+        right: -4vw;
+        width: 2.4vw;
+        height: 2.4vw;
     }
 }
 
@@ -318,6 +323,7 @@ section#detail-frame {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 100;
     width: 100%;
     height: 100%;
     /* background-color: #000000d9; */
@@ -325,7 +331,7 @@ section#detail-frame {
 }
 
 section#detail-frame::after {
-    content: "'";
+    content: "";
     position: fixed;
     top: 0;
     left: 0;
@@ -494,7 +500,6 @@ section#detail-frame .close-frame-btn:hover {
 }
 
 .view-btn .text {
-    font-size: 1.2rem;
     font-weight: bolder;
     font-family: 'Trebuchet MS', sans-serif;
     color: white;
@@ -506,6 +511,7 @@ section#detail-frame .close-frame-btn:hover {
 }
 
 .view-btn .text>p {
+    font-size: 1.2rem;
     padding-right: 1.2rem;
     white-space: nowrap;
 }

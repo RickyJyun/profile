@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/index_anime.css">
     <link rel="stylesheet" data-about-me-imgs-style href="./css/index_about_me_education_img.css">
-    <link rel="stylesheet" href="./css/menu_nav.css">
-    <link rel="stylesheet" href="./css/menu_nav_anime.css">
     <style>
         @import url('https:/fonts.googleapis.com/css2?family=Open+Sans&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,600&family=Open+Sans&display=swap');
@@ -18,43 +16,6 @@
 </head>
 
 <body>
-    <header>
-        <div class="menuBtn">
-            <div><span></span><span></span><span></span></div>
-        </div>
-        <nav style="display: none;">
-            <div>
-                <dl>
-                    <dt data-link="./index">HOME</dt>
-                    <dd>首頁</dd>
-                </dl>
-                <dl>
-                    <dt data-link="./creations">CREATIONS</dt>
-                    <dd>作品集</dd>
-                    <dd>
-                        <dl>
-                            <dd data-link="./creations">網頁設計</dd>
-                            <dd data-link="./creations">平面設計</dd>
-                            <dd data-link="./creations">印刷設計</dd>
-                            <dd data-link="./creations">Landing Page</dd>
-                        </dl>
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>CONTACT</dt>
-                    <dd>與我聯繫</dd>
-                    <dd>
-                        <dl>
-                            <dd>lussdesignstudio@gmail.com</dd>
-                            <dd><a href="https://m.me/104462231406126">Messenger</a></dd>
-                        </dl>
-                    </dd>
-                </dl>
-            </div>
-        </nav>
-    </header>
-
-
     <section id="top_section">
         <div class="main_content">
             <div class="film_frame">
@@ -62,9 +23,9 @@
                     <source
                         src="https://dl.dropboxusercontent.com/scl/fi/iid3s56ohi84aais9qxy0/merge-film.mp4?rlkey=emf93rntrv22e3t9rehfn9wmw&dl=0">
                 </video>
-            </div>
-            <div class="portrait">
-                <img src="./img/portrait.png">
+                <div class="portrait">
+                    <img src="./img/portrait.png">
+                </div>
             </div>
             <div class="portrait">
                 <img src="./img/portrait.png">
@@ -196,7 +157,7 @@
                     <p>Portfolio updated sporadically!<br>Stay tuned for surprises. </p>
                 </figure>
                 <figure class="count_num">
-                    <span>(24)</span>
+                    <span>(90)</span>
                 </figure>
             </div>
 
@@ -210,8 +171,8 @@
                         <div class="img_frame"><img src="./img/about-creations_4_UI-design.jpg"></div>
                     </div>
                 </div>
-                <figure>
-                    <div class="count_num">(24)</div>
+                <figure data-link="./creations" data-link-name="web_design">
+                    <div class="count_num">(05)</div>
                     <div class="item">
                         <h1 class="en_title">Web Design</h1>
                         <dl>
@@ -223,8 +184,8 @@
                         </dl>
                     </div>
                 </figure>
-                <figure>
-                    <div class="count_num">(11)</div>
+                <figure data-link="./creations" data-link-name="graphic_design">
+                    <div class="count_num">(70)</div>
                     <div class="item">
                         <h1 class="en_title">Graphic Design</h1>
                         <dl>
@@ -237,8 +198,8 @@
                         </dl>
                     </div>
                 </figure>
-                <figure>
-                    <div class="count_num">(11)</div>
+                <figure data-link="./creations" data-link-name="print_design">
+                    <div class="count_num">(10)</div>
                     <div class="item">
                         <h1 class="en_title">Print Design</h1>
                         <dl>
@@ -252,8 +213,8 @@
                         </dl>
                     </div>
                 </figure>
-                <figure>
-                    <div class="count_num">(11)</div>
+                <figure data-link="./creations" data-link-name="landing_page">
+                    <div class="count_num">(05)</div>
                     <div class="item">
                         <h1 class="en_title">Landing Page</h1>
                         <dl>
@@ -266,7 +227,7 @@
                     </div>
                 </figure>
                 <figure>
-                    <div class="count_num">(11)</div>
+                    <div class="count_num">(00)</div>
                     <div class="item">
                         <h1 class="en_title">UI Design</h1>
                     </div>

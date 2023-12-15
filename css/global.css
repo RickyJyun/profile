@@ -4,19 +4,17 @@
 
 html {
     font-size: 1vmax;
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 html::-webkit-scrollbar {
     display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-html {
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
 }
 
 html,
@@ -29,7 +27,20 @@ html * {
 }
 
 body {
+    font-size: 1vmax;
     background: #222326;
+}
+
+body p {
+    font-size: .8rem;
+}
+
+body h1 {
+    font-size: 4rem;
+    font-weight: unset;
+    line-height: 1.2;
+    /* font-family: 'Open Sans', sans-serif; */
+    font-family: 'Nunito Sans', sans-serif;
 }
 
 section[id] {
@@ -39,18 +50,6 @@ section[id] {
     line-height: 1.8;
     color: white;
     font-family: Microsoft JhengHei;
-}
-
-section[id] p {
-    font-size: .8rem;
-}
-
-section[id] h1 {
-    font-size: 4rem;
-    font-weight: unset;
-    line-height: 1.2;
-    /* font-family: 'Open Sans', sans-serif; */
-    font-family: 'Nunito Sans', sans-serif;
 }
 
 section[id] img {
@@ -68,8 +67,8 @@ section[id] .count_num {
         font-size: 1.4vw;
     }
 
-    section[id] {
-        font-size: 1.4vw;
+    body {
+        font-size: 1.4vmax;
     }
 }
 
@@ -78,11 +77,11 @@ section[id] .count_num {
         font-size: 1.9vmax;
     }
 
-    section[id] {
+    body {
         font-size: 1.9vmax;
     }
 
-    section[id] h1 {
+    body h1 {
         font-size: 2.6rem;
     }
 }

@@ -30,7 +30,7 @@
     filter: grayscale(80%);
 }
 
-#top_section .portrait {
+/* #top_section .portrait {
     position: absolute;
     top: 2%;
     left: 6%;
@@ -39,6 +39,18 @@
 }
 
 #top_section .portrait:nth-child(2) {
+    display: none;
+} */
+
+#top_section>.main_content>.portrait {
+    position: absolute;
+    top: 2%;
+    left: 6%;
+    z-index: 2;
+    width: 20%;
+}
+
+#top_section .film_frame .portrait {
     display: none;
 }
 
@@ -87,13 +99,14 @@
         padding-bottom: 64vmin;
         clip-path: polygon(0% 0%, 100% 0%, 90% 60%, 100% 100%, 0% 100%, 10% 40%);
         z-index: 3;
+        overflow: hidden;
     }
 
     #top_section .film_frame::before {
         filter: brightness(100%);
     }
 
-    #top_section .portrait {
+    /* #top_section .portrait {
         left: 50%;
         transform: translateX(-50%);
         width: 60vmin;
@@ -103,6 +116,22 @@
         display: unset;
         z-index: 3;
         clip-path: inset(31.9% 0% 29% 0%);
+        mix-blend-mode: soft-light;
+    } */
+
+    #top_section>.main_content>.portrait {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60vmin;
+    }
+
+    #top_section .film_frame .portrait {
+        display: block;
+        width: 60vmin;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -32%);
+        z-index: 3;
         mix-blend-mode: soft-light;
     }
 
@@ -426,9 +455,14 @@
 }
 
 #about_skills .order_num span {
-    border: .1em solid white;
+    font-size: 1rem;
+    border: .1rem solid white;
     border-radius: 10rem;
-    padding: .3em .7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
 }
 
 #about_skills .desc_part {
@@ -576,9 +610,14 @@
 }
 
 #about_creations .order_num span {
-    border: .1em solid white;
+    font-size: 1rem;
+    border: .1rem solid white;
     border-radius: 10rem;
-    padding: .3em .7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
 }
 
 #about_creations .desc_part {
@@ -654,6 +693,7 @@
     justify-content: space-between;
     border-top: 1px solid #969799;
     padding: 3.15vmax 0;
+    cursor: pointer;
 }
 
 #about_creations .creations_part figure .item {
@@ -687,7 +727,7 @@
     font-size: .8rem;
     color: #969799;
     position: relative;
-    margin-right: 3.5%;
+    margin-right: 3.2rem;
     transition: .3s;
 }
 
@@ -703,8 +743,7 @@
     content: "．";
     font-size: 3rem;
     position: absolute;
-    top: 50%;
-    transform: translateY(-52%);
+    top: -2.2rem;
 }
 
 #about_creations .creations_part dd:last-child:after {
