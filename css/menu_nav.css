@@ -116,7 +116,7 @@
 
 @media screen and (max-width:700px) {
     .menuBtn {
-        top: 2%;
+        top: 2.4%;
         left: 5%;
         transform-origin: 0% 0%;
         transform: scale(.9);
@@ -193,16 +193,28 @@ nav .sns-icon-box {
     background-color: #f1f3f5;
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: .6rem;
     position: absolute;
     right: 3rem;
     bottom: 3rem;
 }
 
-nav .sns-icon-box [data-svg-name] {
-    width: 1.6rem;
-    height: 1.6rem;
+
+nav .sns-icon-box [data-svg-icon] {
+    width: 2rem;
+    height: 2rem;
     background-color: #222326;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+    transition: .3s;
+}
+
+nav .sns-icon-box [data-svg-icon] svg {
+    fill: #f1f3f5;
+}
+
+nav .sns-icon-box [data-svg-icon]:hover {
+    opacity: 0.8;
 }
 
 nav a {
@@ -247,9 +259,27 @@ nav a:hover {
     }
 
     nav .top-box {
-        display: initial;
-        min-height: 4.8rem;
         border-bottom: solid 1px #c3c6c8;
+        min-height: 4rem;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    [data-svg-icon-mask="luss-logo"] {
+        width: 34%;
+        height: 53%;
+        /* background: linear-gradient(100deg, #F276FF 40%, #08a2ec); */
+        background: #969799;
+        -webkit-mask-image: url('../img/LUSS\ LOGO\ icon-12.svg');
+        mask-image: url('../img/LUSS\ LOGO\ icon-12.svg');
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center center;
+        mask-position: center center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        opacity: .6;
+        margin-top: 0.5rem;
     }
 
     nav .lists-box {
@@ -273,10 +303,7 @@ nav a:hover {
         position: unset;
     }
 
-    nav .sns-icon-box [data-svg-name] {
-        width: 2rem;
-        height: 2rem;
-    }
+
 }
 
 /* nav 菜單欄 --end-- */

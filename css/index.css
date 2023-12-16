@@ -1,3 +1,22 @@
+/*共用樣式 --start--*/
+.en_desc p {
+    font-size: .72rem;
+}
+
+.en_desc p:first-child {
+    color: #969799;
+}
+
+@media screen and (max-width:1195px) {
+    .en_desc p {
+        font-size: .84rem;
+    }
+}
+
+/*共用樣式 --end--*/
+
+
+
 /* top_section -start- */
 #top_section .film_frame {
     position: relative;
@@ -30,18 +49,6 @@
     filter: grayscale(80%);
 }
 
-/* #top_section .portrait {
-    position: absolute;
-    top: 2%;
-    left: 6%;
-    z-index: 2;
-    width: 20%;
-}
-
-#top_section .portrait:nth-child(2) {
-    display: none;
-} */
-
 #top_section>.main_content>.portrait {
     position: absolute;
     top: 2%;
@@ -72,6 +79,29 @@
     -webkit-text-stroke: .1vmax #BDBDBD;
 }
 
+section#top_section .sns-icon-box {
+    position: absolute;
+    top: 7rem;
+    left: 2.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+section#top_section .sns-icon-box [data-svg-icon] {
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+section#top_section .sns-icon-box [data-svg-icon] svg {
+    fill: #969799;
+    transition: .3s;
+}
+
+section#top_section .sns-icon-box [data-svg-icon] svg:hover {
+    fill: white;
+}
+
 @media screen and (min-width:700px) and (max-width:1367px) {
     #top_section .film_frame {
         padding-bottom: 54.5%;
@@ -84,6 +114,10 @@
 
     #top_section .texts {
         top: unset;
+    }
+
+    #top_section>.main_content>.portrait {
+        left: 8%;
     }
 }
 
@@ -105,19 +139,6 @@
     #top_section .film_frame::before {
         filter: brightness(100%);
     }
-
-    /* #top_section .portrait {
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60vmin;
-    }
-
-    #top_section .portrait:nth-child(2) {
-        display: unset;
-        z-index: 3;
-        clip-path: inset(31.9% 0% 29% 0%);
-        mix-blend-mode: soft-light;
-    } */
 
     #top_section>.main_content>.portrait {
         left: 50%;
@@ -142,6 +163,18 @@
     #top_section .texts p {
         font-size: 22vw;
     }
+
+    section#top_section .sns-icon-box {
+        top: 3%;
+        left: unset;
+        right: 5%;
+    }
+
+    section#top_section .sns-icon-box [data-svg-icon] {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+
 }
 
 /* top_section -end- */
@@ -491,14 +524,6 @@
     color: #969799;
 }
 
-#about_skills .en_desc p {
-    font-size: .72rem;
-}
-
-#about_skills .en_desc p:first-child {
-    color: #969799;
-}
-
 #about_skills .skill_logos_part {
     margin: 7vmax 0;
     overflow: hidden;
@@ -644,15 +669,6 @@
     color: #969799;
 }
 
-
-#about_creations .en_desc p {
-    font-size: .72rem;
-}
-
-#about_creations .en_desc p:first-child {
-    color: #969799;
-}
-
 #about_creations .creations_part {
     width: 84%;
     margin-left: auto;
@@ -697,7 +713,7 @@
 }
 
 #about_creations .creations_part figure .item {
-    width: 90%;
+    width: 80%;
 }
 
 #about_creations .creations_part figure:last-child {
@@ -727,7 +743,7 @@
     font-size: .8rem;
     color: #969799;
     position: relative;
-    margin-right: 3.2rem;
+    margin-right: 2.6rem;
     transition: .3s;
 }
 
@@ -744,15 +760,44 @@
     font-size: 3rem;
     position: absolute;
     top: -2.2rem;
+    right: -2.8rem;
 }
 
 #about_creations .creations_part dd:last-child:after {
     display: none;
 }
 
+#about_creations [data-svg-icon="upper-right-arrow"] {
+    width: .9rem;
+    height: .9rem;
+    transform-origin: 0% 100%;
+    transform: scale(0);
+    transition: .3s;
+}
+
+#about_creations [data-svg-icon="upper-right-arrow"] svg {
+    fill: white;
+}
+
+#about_creations .creations_part figure:hover [data-svg-icon="upper-right-arrow"] {
+    transform: scale(1);
+}
+
 @media screen and (max-width:1195px) {
     .preview_imgbox {
         display: none;
+    }
+
+    #about_creations .creations_part dd {
+        font-size: .88rem;
+    }
+
+    #about_creations [data-svg-icon="upper-right-arrow"] {
+        transform: scale(1);
+    }
+
+    #about_creations [data-svg-icon="upper-right-arrow"] svg {
+        fill: #969799;
     }
 }
 
@@ -815,6 +860,7 @@
     }
 
     #about_creations .creations_part figure {
+        position: relative;
         flex-direction: column;
         padding: 4vmax 0;
     }
@@ -841,6 +887,17 @@
 
     #about_creations .creations_part dd::after {
         display: none;
+    }
+
+    #about_creations [data-svg-icon="upper-right-arrow"] {
+        position: absolute;
+        top: 5vmax;
+        right: 0;
+        transform: scale(.8);
+    }
+
+    #about_creations .creations_part figure:hover [data-svg-icon="upper-right-arrow"] {
+        transform: scale(.8);
     }
 }
 

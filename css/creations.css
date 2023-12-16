@@ -259,6 +259,7 @@ div.creations_info h2 {
     .creations_display_box {
         width: 96%;
         grid-template-columns: repeat(3, 1fr);
+        padding: 7rem 0 10vmax 0;
     }
 
     .options_list .list_btn {
@@ -585,3 +586,31 @@ section#detail-frame .close-frame-btn:hover {
 }
 
 /* view-btn -end- */
+
+
+
+/* luss-logo -start- */
+[data-svg-icon="luss-logo"] {
+    position: fixed;
+    top: 2.2rem;
+    right: 2rem;
+    width: 7rem;
+    fill: white;
+    /* fill: #969799; */
+    mix-blend-mode: difference;
+}
+
+@media screen and (min-width:700px) and (max-width:1195px) {
+    [data-svg-icon="luss-logo"] {
+        width: 9rem;
+    }
+}
+
+@media screen and (max-width:700px) {
+    [data-svg-icon="luss-logo"] {
+        top: 2rem;
+        right: 1rem;
+    }
+}
+
+/* luss-logo -end- */

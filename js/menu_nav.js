@@ -15,7 +15,9 @@ let navHTML = `<header>
 </div>
 <nav style="display: none;">
     <div>
-        <div class="top-box"></div>
+        <div class="top-box">
+            <div data-svg-icon-mask="luss-logo"></div>
+        </div>
         <div class="lists-box">
             <dl>
                 <dt data-link="./index">HOME</dt>
@@ -39,16 +41,17 @@ let navHTML = `<header>
                 <dd>
                     <dl>
                         <dd>+886 975665735</dd>
-                        <dd>lussdesignstudio@gmail.com</dd>
-                        <dd><a href="https://m.me/104462231406126">Messenger</a></dd>
+                        <dd><a href="mailto:lussdesignstudio@gmail.com"
+                                target="_blank">lussdesignstudio@gmail.com</a></dd>
+                        <dd><a href="https://m.me/104462231406126" target="_blank">Messenger</a></dd>
                     </dl>
                 </dd>
             </dl>
         </div>
         <div class="sns-icon-box">
-            <div data-svg-name="facebook"></div>
-            <div data-svg-name="linkedin"></div>
-            <div data-svg-name="104"></div>
+            <div data-svg-icon="facebook"></div>
+            <div data-svg-icon="linkedin"></div>
+            <div data-svg-icon="behance"></div>
         </div>
     </div>
 </nav>
@@ -58,7 +61,7 @@ bodyEl.insertAdjacentHTML('afterbegin', navHTML)
 
 
 
-window.addEventListener('DOMContentLoaded', function () {
+setTimeout(function () {
     let menuBtn = document.querySelector('.menuBtn')
     let menuBtnAnimeTimes = Number(getComputedStyle(document.querySelector('.menuBtn *')).animationDuration.replace('s', '')) * 1000
 
@@ -95,12 +98,12 @@ window.addEventListener('DOMContentLoaded', function () {
         dataLink.addEventListener('click', function () {
             if (this.dataset.link == './creations') {
                 sessionStorage.setItem('creationsName', this.dataset.linkName)
-                window.location.href = this.dataset.link + `.html`
+                window.location.href = this.dataset.link
             } else {
-                window.location.href = this.dataset.link + `.html`
+                window.location.href = this.dataset.link
             }
         })
 
     }
     /*menu nav 選項連結點擊 --end--*/
-})
+}, 100)
