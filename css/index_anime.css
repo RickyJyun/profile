@@ -1,3 +1,81 @@
+/*#top_section text_P glitch 動畫 --start--*/
+#top_section .texts.change-text p::before,
+#top_section .texts.change-text p::after {
+    animation-duration: .4s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+}
+
+#top_section .texts.change-text p::before {
+    animation-name: text-p-before_glitch-anime;
+}
+
+#top_section .texts.change-text p::after {
+    animation-name: text-p-after_glitch-anime;
+}
+
+/* @keyframes text-p-before_glitch-anime {
+
+    0%,
+    100% {
+        clip-path: inset(50% 50% 50% 50%);
+    }
+
+    5%,
+    95% {
+        clip-path: inset(50% 50% 50% 50%);
+    }
+
+    10%,
+    90% {
+        clip-path: inset(50% 50% 50% 50%);
+    }
+
+    15%,
+    85% {
+        clip-path: inset(50% 50% 50% 50%);
+    }
+
+    20%,
+    80% {
+        clip-path: inset(50% 50% 50% 50%);
+    }
+
+    25%,
+    75% {
+        clip-path: inset(50% 50% 50% 50%);
+    }
+
+    30%,
+    70% {
+        clip-path: inset(50% 50% 50% 50%);
+    }
+
+    35%,
+    65% {
+        clip-path: inset(50% 50% 50% 50%);
+    }
+
+    40%,
+    60% {
+        clip-path: inset(50% 50% 50% 50%);
+    }
+
+    45%,
+    55% {
+        clip-path: inset(50% 50% 50% 50%);
+    }
+
+    50% {
+        clip-path: inset(50% 50% 50% 50%);
+    }
+} */
+
+/*#top_section text_P glitch 動畫 --end--*/
+
+
+
 /* #about_me 區塊動畫 -start-*/
 #about_me .options_part dd[data-showed]::before,
 #about_me .options_part dd[data-showed]::after {

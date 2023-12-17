@@ -106,4 +106,4 @@ setTimeout(function () {
 
     }
     /*menu nav 選項連結點擊 --end--*/
-}, 100)
+}, 1000)

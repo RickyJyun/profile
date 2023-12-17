@@ -51,10 +51,12 @@
 
 #top_section>.main_content>.portrait {
     position: absolute;
-    top: 2%;
-    left: 6%;
+    top: 3%;
+    left: 5%;
     z-index: 2;
     width: 20%;
+    mask-image: linear-gradient(0deg, transparent, black 26%);
+    -webkit-mask-image: linear-gradient(0deg, transparent, black 26%);
 }
 
 #top_section .film_frame .portrait {
@@ -77,6 +79,28 @@
     line-height: 1;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: .1vmax #BDBDBD;
+    position: relative;
+    overflow: hidden;
+}
+
+#top_section .texts p>span.hide {
+    opacity: 0;
+}
+
+#top_section .texts p::before {
+    content: attr(data-text);
+    position: absolute;
+    top: -1rem;
+    left: -4rem;
+    clip-path: inset(50% 50% 50% 50%);
+}
+
+#top_section .texts p::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 1rem;
+    right: -4rem;
+    clip-path: inset(50% 50% 50% 50%);
 }
 
 section#top_section .sns-icon-box {
@@ -117,7 +141,11 @@ section#top_section .sns-icon-box [data-svg-icon] svg:hover {
     }
 
     #top_section>.main_content>.portrait {
-        left: 8%;
+        left: 6%;
+    }
+
+    #top_section>.main_content>.portrait {
+        width: 25%;
     }
 }
 
@@ -143,15 +171,15 @@ section#top_section .sns-icon-box [data-svg-icon] svg:hover {
     #top_section>.main_content>.portrait {
         left: 50%;
         transform: translateX(-50%);
-        width: 60vmin;
+        width: 64vmin;
     }
 
     #top_section .film_frame .portrait {
         display: block;
-        width: 60vmin;
+        width: 64vmin;
         position: absolute;
         left: 50%;
-        transform: translate(-50%, -32%);
+        transform: translate(-50%, -29.5%);
         z-index: 3;
         mix-blend-mode: soft-light;
     }
@@ -162,6 +190,7 @@ section#top_section .sns-icon-box [data-svg-icon] svg:hover {
 
     #top_section .texts p {
         font-size: 22vw;
+        text-align: center;
     }
 
     section#top_section .sns-icon-box {
